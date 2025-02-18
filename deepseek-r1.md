@@ -89,7 +89,7 @@ DeepSeek刚刚（2025年1月20日）放出了自己的o1-like模型，命名为D
 
 ### 6. 实验与结论
 
-![deepseek-r1实验结论](./deepseek-r1实验结论.png)
+![deepseek-r1实验结论](./pics/deepseek-r1实验结论.png)
 
 - 实验设计：
   - 论文在多种数学推理（AIME 2024、MATH-500）、代码题（LiveCodeBench、Codeforces）、知识问答（MMLU、GPQA Diamond、SimpleQA）和开放生成场景（AlpacaEval2.0、ArenaHard）等上进行了系统评测。

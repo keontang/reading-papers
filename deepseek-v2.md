@@ -29,7 +29,7 @@
 
 KV Cache是大模型标配的推理加速功能，也是推理过程中，显存资源巨大开销的元凶之一。在模型推理时，KV Cache在显存占用量可达30%以上。
 
-![kv cache](./kv-cache.jpg)
+![kv cache](./pics/kv-cache.jpg)
 
 目前大部分针对KV Cache的优化工作，主要集中在工程上。比如著名的VLLM，基于paged Attention，最大限度地利用碎片化显存空间，从而提升了空间利用率。
 
@@ -41,15 +41,15 @@ KV Cache是大模型标配的推理加速功能，也是推理过程中，显存
 
 我们先回到Transformer计算Attention的公式，
 
-![attention](./attention.png)
+![attention](./pics/attention.png)
 
 大模型的推理是一个自回归的过程，即一个从头到尾逐步生成的过程。下一步的输出，取决于上一步。
 
-![openai-gpt](./openai-gpt.jpg)
+![openai-gpt](./pics/openai-gpt.jpg)
 
 假如我们需要输出Robot must obey orders这四个字。
 
-![example](./example.jpg)
+![example](./pics/example.jpg)
 
 模型生成第一步Robot时，会接收一个特殊字符\<s>，作为第一步的输入，然后输出Robot。接着将“\<s> Robot”作为第二步的输入，生成must，以此类推，直到模型输出遇到最大长度限制，或者输出了停止字符，则停止输出过程。
 
@@ -57,15 +57,15 @@ KV Cache是大模型标配的推理加速功能，也是推理过程中，显存
 
 每一行代表一个查询向量与所有键向量的点积，但由于掩码的存在，每个查询只能访问它自己和之前的键（因果关系）。毕竟在生成的过程中，是不能看到后续的值的。
 
-![softmax](./example-softmax.png)
+![softmax](./pics/example-softmax.png)
 
 最后输出的softmax结果大概如下：
 
-![score](./score.jpg)
+![score](./pics/score.jpg)
 
 然后再将这个softmax结果，和对应的V值进行计算。在这个过程中，上面的矩阵计算，四行的Attention拆解下来如下
 
-![att softmax](./att-softmax.png)
+![att softmax](./pics/att-softmax.png)
 
 我们可以发现这么一些规律：
 
@@ -82,7 +82,7 @@ KV Cache是大模型标配的推理加速功能，也是推理过程中，显存
 
 MOE层替代的是传统Transformer架构中FFN这一层。就是图中框红圈的Feed Forward层。
 
-![transformer](./transformer.jpg)
+![transformer](./pics/transformer.jpg)
 
 FFN层的几个问题，
 
@@ -92,7 +92,7 @@ FFN层的几个问题，
 
 MOE架构主要针对第二个问题进行了较大的改进。简而言之就是将一个完整的FFN，替换成由多个“专家网络”组成的神经网络，这个神经网络可以是简单的FFN，或者其它结构。从而在推理或者训练时，能够针对不同的数据进行解耦，增加效率。
 
-![ffn moe](./ffn-moe.jpg)
+![ffn moe](./pics/ffn-moe.jpg)
 
 从上图的结构可以看出，MOE架构包含两个部分：
 
@@ -115,7 +115,7 @@ MOE架构主要针对第二个问题进行了较大的改进。简而言之就�
 
 我们可以来看看DeepSeek-V2对上述两个核心部分到底做了哪些改进。
 
-![deepseek moe](./deepseekmoe.png)
+![deepseek moe](./pics/deepseekmoe.png)
 
 ### Multiple Latent Attention
 
@@ -132,11 +132,11 @@ MLA是对传统多头注意力做的改进，其目的有两个：
 
 具体来看看DeepSeek中的具体实现公式：
 
-![kv](./mla-dkv.png)
+![kv](./pics/mla-dkv.png)
 
 - c 是对Key和Value压缩后的隐向量，通过一个降维映射矩阵和模型输入h得到：
 
-![latent](./latent-c.png)
+![latent](./pics/latent-c.png)
 
 - 得到这个 c 后，具体的key和value，由两个对应的升维矩阵还原
 - 在推理的过程中，只需要缓存每一步的 c，然后再计算还原回原始的K和V即可。由于 c 的维度远小于K、V。因此每一步token的推理产生的缓存由之前的 2n(h)d(h)l 变成了 d(c)l。
@@ -145,7 +145,7 @@ MLA是对传统多头注意力做的改进，其目的有两个：
 
 对Q的压缩方式和K、V一致。
 
-![mla-q](./mla-q.png)
+![mla-q](./pics/mla-q.png)
 
 **位置编码解耦**
 
@@ -158,7 +158,7 @@ DeepSeekMoE引入了两个主要策略：
 - **细粒度专家分割（Fine-Grained Expert Segmentation）**：通过将每个FFN专家进一步细分，这允许模型在保持参数总数不变的情况下，激活更多的、更细粒度的专家。这种策略使得各个专家能够专注于更细致的知识领域，提高了专家的专业化程度。
 - **共享专家隔离（Shared Expert Isolation）**：设置一部分专家作为“共享专家”，这些专家总是被激活，用于捕捉和整合常见的跨上下文知识。这样可以减少路由专家之间的知识冗余，每个路由专家可以更专注于独特的知识领域。
 
-![expert](./v2-expert.jpg)
+![expert](./pics/v2-expert.jpg)
 
 上图摘取自DeepSeek MOE的技术报告，从左到右分别是传统的MOE，细粒度专家分割，细粒度专家分割+共享专家隔离。
 

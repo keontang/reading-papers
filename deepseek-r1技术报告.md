@@ -30,7 +30,7 @@
 
 ### 2. DeepSeek-R1：冷启动与多阶段训练的平衡之道
 
-![deepseek-r1训练过程](./deepseek-r1训练过程.png)
+![deepseek-r1训练过程](./pics/deepseek-r1训练过程.png)
 
 为解决上述问题，团队提出**“冷启动+多阶段RL”策略**：
 
