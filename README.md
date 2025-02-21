@@ -11,3 +11,7 @@
 **视觉大模型**
 
 - [deepseek-vl](./deepseek-vl.md)
+
+**其他**
+
+- [test time scaling](./s1--Simple%20test-time%20scaling.md)
