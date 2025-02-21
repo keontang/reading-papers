@@ -11,6 +11,7 @@
 **视觉大模型**
 
 - [deepseek-vl](./deepseek-vl.md)
+- [deepseek-vl2](./deepseek-vl2.md)
 
 **其他**
 
