@@ -16,3 +16,4 @@
 **其他**
 
 - [test time scaling](./s1--Simple%20test-time%20scaling.md)
+- [kv cache](./kv-cache.md)
