@@ -15,5 +15,7 @@
 
 **其他**
 
+- [react vs function-call](./react-vs-fc.md)
 - [test time scaling](./s1--Simple%20test-time%20scaling.md)
 - [kv cache](./kv-cache.md)
+- [pd 分离](./pd.md)
