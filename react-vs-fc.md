@@ -394,7 +394,7 @@ def create_structured_chat_agent(
     else:
         llm_with_stop = llm
 
-    # 这里就没有像 create_tool_calling_agent 函数那样去调用 llm.bindtools(tools) 让 llm 绑定工具
+    # 这里就没有像 create_tool_calling_agent 函数那样去调用 llm.bindtools(tools) 将工具的定义附加到模型的调用过程中
     agent = (
         RunnablePassthrough.assign(
             agent_scratchpad=lambda x: format_log_to_str(x["intermediate_steps"]),
@@ -644,7 +644,7 @@ def create_tool_calling_react_agent(
     )
     check_variables(prompt)
 
-    # llm 绑定 tools
+    # bind_tools 将工具的定义附加到模型的调用过程中
     tools_for_llm = list(tools)
     llm_with_tools = llm.bind_tools(tools=tools_for_llm)
 
@@ -779,7 +779,7 @@ class ReActToolCallingMotleyAgent(LangchainMotleyAgent):
   - 一种是纯 prompt 引导大模型进行 function call（不管 llm 是否支持 function call，都可以纯 prompt 方式引导）
 - 不管使用哪种方式，都需要在 prompt 中进行描述
   - 因为与大模型的交互是基于 prompt，tools 都需要在 prompt 中描述清楚
-  - 对于 function call llm，openai 需要调用 llm.bind_tools() 在 openai 大模型推理服务上做一个绑定；而其他一些通过 sdk 可以实现 function call 调用
+  - 对于 function call llm，需要通过 sdk 调用 llm.bind_tools() 将工具的定义附加到模型的调用过程中，可以实现工具添加到 function call prompt 模版中
 - ReACT 跟 function call 压根不是一个层面的东西
   - ReACT 在工具调用的实现方式，可以使用 llm function call 能力
   - 也可以使用纯 prompt 引导方式
@@ -793,3 +793,4 @@ class ReActToolCallingMotleyAgent(LangchainMotleyAgent):
 - [https://www.cnblogs.com/frankcui/p/18681161](https://www.cnblogs.com/frankcui/p/18681161)
 - [https://medium.com/motleycrew-ai/reliable-ai-at-your-fingertips-how-we-built-universal-react-agents-that-just-work-1876a9a674a8](https://medium.com/motleycrew-ai/reliable-ai-at-your-fingertips-how-we-built-universal-react-agents-that-just-work-1876a9a674a8)
 - [https://www.yangyanxing.com/llmdev/langgraph/2.5_langGraph%20ReAct%20%E4%BD%BF%E7%94%A8.html](https://www.yangyanxing.com/llmdev/langgraph/2.5_langGraph%20ReAct%20%E4%BD%BF%E7%94%A8.html)
+- [https://github.com/samwit/langchain-tutorials/blob/main/agents/YT_Exploring_ReAct_on_Langchain.ipynb](https://github.com/samwit/langchain-tutorials/blob/main/agents/YT_Exploring_ReAct_on_Langchain.ipynb)
