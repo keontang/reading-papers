@@ -17,6 +17,7 @@
 
 - [openai function call](./openai-fc.md)
 - [react vs function-call](./react-vs-fc.md)
+- [一文彻底搞懂大模型 - Prompt Engineering、Function Calling、RAG、Fine-tuning](./pe-fc-rag-ft.md)
 - [test time scaling](./s1--Simple%20test-time%20scaling.md)
 - [kv cache](./kv-cache.md)
 - [pd 分离](./pd.md)
