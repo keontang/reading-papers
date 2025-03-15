@@ -1,3 +1,12 @@
+- [在任意LLM模型中实现function calling](#在任意llm模型中实现function-calling)
+  - [OpenAI的Function calling](#openai的function-calling)
+  - [实现通用的Function calling](#实现通用的function-calling)
+    - [Function calling原理](#function-calling原理)
+    - [神奇的赛博咒语](#神奇的赛博咒语)
+  - [ollama demo](#ollama-demo)
+- [references](#references)
+
+
 # 在任意LLM模型中实现function calling
 
 ## OpenAI的Function calling
