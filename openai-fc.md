@@ -70,8 +70,11 @@ You'll then execute the function code, send back the results, and the model will
 
 Function calling has two primary use cases:
 
-- **Fetching Data**: Retrieve up-to-date information to incorporate into the model's response (RAG). Useful for searching knowledge bases and retrieving specific data from APIs (e.g. current weather data).
-- **Taking Action**: Perform actions like submitting a form, calling APIs, modifying application state (UI/frontend or backend), or taking agentic workflow actions (like handing off the conversation).
+| | |
+| --- | --- |
+| Fetching Data | Retrieve up-to-date information to incorporate into the model's response (RAG). Useful for searching knowledge bases and retrieving specific data from APIs (e.g. current weather data). |
+| Taking Action | Perform actions like submitting a form, calling APIs, modifying application state (UI/frontend or backend), or taking agentic workflow actions (like handing off the conversation). |
+| | |
 
 ## Sample function
 
