@@ -94,6 +94,8 @@ If necessary, you can polish the description.Only output the Description, with C
 
 ## 大模型 function call 微调
 
+> [Fine tuning for function calling](https://cookbook.openai.com/examples/fine_tuning_for_function_calling#lets-generate-every-invocation-for-every-function-first)
+
 大模型的 function call 微调，目的是让大模型能更准确的识别特定的函数或API调用。
 
 ### 准备数据
