@@ -22,6 +22,7 @@
 
 **其他**
 
+- [Agent的九种设计模式](./agent.md)
 - [test time scaling](./s1--Simple%20test-time%20scaling.md)
 - [kv cache](./kv-cache.md)
 - [pd 分离](./pd.md)
