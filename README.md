@@ -20,9 +20,12 @@
 - [在任意LLM模型中实现function calling](./fc.md)
 - [react vs function-call](./react-vs-fc.md)
 
+**prefill-decode 分离**
+
+- [kv cache](./kv-cache.md)
+- [pd 分离](./pd.md)
+
 **其他**
 
 - [Agent的九种设计模式](./agent.md)
 - [test time scaling](./s1--Simple%20test-time%20scaling.md)
-- [kv cache](./kv-cache.md)
-- [pd 分离](./pd.md)
