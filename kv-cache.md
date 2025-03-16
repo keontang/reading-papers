@@ -54,6 +54,7 @@ KV Cache 是一种为大模型量身定制的推理加速技术。transformer官
 
 ![example](./pics/kvc-example.png)
 
+![example](./pics/kvc-example2.png)
 
 ```python
 # 拆分 Q、K、V
