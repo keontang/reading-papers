@@ -32,3 +32,4 @@
 - [test time scaling](./s1--Simple%20test-time%20scaling.md)
 - [A Visual Guide to Mixture of Experts (MoE)](./A%20Visual%20Guide%20to%20Mixture%20of%20Experts%20(MoE).pdf)
 - [Training MoEs at Scale with PyTorch](./moe-sacle-with-pytorch.md)
+- [大模型并行计算介绍](./parallelism.md)
